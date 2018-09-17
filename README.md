@@ -15,7 +15,11 @@ Script in Python 3.6 (probably won't work with Python 2.x versions). Requires th
 
 ```
 pip install zipfile
+```
+```
 pip install patool
+```
+```
 pip install pillow
 ```
 In windows you'll need to run cmd.exe using the "run as administrator" option for those commands to work.
