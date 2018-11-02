@@ -1,14 +1,14 @@
 # comics2pdf
 A script to convert comic files (cbr, cbz) to pdf, in python3. Works in Windows. Linux not tested.
 
-##Install
+<h4>Install</h4>
 download the repo and run the command:
-<code>python setup.py develop</code>
+<br><code>python setup.py develop</code>
 
 
-##Useage
+<h4>Useage</h4>
 go the directory of the file(s) and run the command:
-<code>c2p</code>
+<br><code>c2p</code>
 
 
 
