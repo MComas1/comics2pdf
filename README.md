@@ -2,7 +2,8 @@
 <h4>
 A command-line tool to convert comic files (cbr, cbz) to pdf, in python3. Works in Windows. Linux not tested.
 </h4>
-# Install
+
+# install
 <h4>
 download the repo and run the command:
 <br><code>python setup.py develop</code>
