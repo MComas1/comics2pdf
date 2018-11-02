@@ -6,9 +6,9 @@
 #
 # Author:  MComas1
 # Date:  14-09-18
-#
 # License:  You can do what you want with it.
 # Mainly based on a script by Bransorem (https://github.com/bransorem/comic2pdf)
+# Turned to a command-line tool by theunderdog (https://github.com/theunderdog)
 # import os, sys, zipfile, patoolib
 # from PIL import Image
 # import PIL.ExifTags
