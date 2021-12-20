@@ -25,7 +25,8 @@ def olog_info (msg, out=sys.stdout):
 
 def handlerar2(filein):
 	tmp_dir = os.getcwd()+"\\Teemp\\"
-	os.mkdir(tmp_dir)
+	if not os.path.exists(tmp_dir):
+		os.mkdir(tmp_dir)
 	original = sys.stdout
 	sys.stdout = open("comic2pdf_log.txt","a")
 	patoolib.util.log_info = nlog_info
