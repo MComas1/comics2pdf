@@ -25,14 +25,16 @@ def olog_info (msg, out=sys.stdout):
 
 def handlerar2(filein):
 	tmp_dir = os.getcwd()+"\\Teemp\\"
-	os.mkdir(tmp_dir)
+	if not os.path.exists(tmp_dir):
+		os.mkdir(tmp_dir)
 	original = sys.stdout
 	sys.stdout = open("comic2pdf_log.txt","a")
 	patoolib.util.log_info = nlog_info
 	patoolib.extract_archive(filein, outdir=tmp_dir)
 	newfile = filein.replace(filein[-4:],".pdf")
 	toPDF2(newfile,tmp_dir,7)
-	cleanDir(tmp_dir)
+	if os.path.exists(tmp_dir):
+		cleanDir(tmp_dir)
 	print("------------------------------------------------------------")
 	
 	sys.stdout = original
@@ -46,13 +48,16 @@ def handlezip(filein):
 	newfile = filein.replace(filein[-4:],".pdf")
 	toPDF2(newfile,tmp_dir,0)
 	try:
-		cleanDir(tmp_dir)
+		if os.path.exists(tmp_dir):
+			os.cleanDir(tmp_dir)	
 	except:
 		aaa = 223
 	print("\""+newfile[:-4]+"\" successfully converted!")
 	
 def toPDF2(filename, newdir,ii):
 	ffiles = os.listdir(newdir)
+	if ffiles[0].endswith(".xml"):
+		ffiles.remove(ffiles[0])
 	if (len(ffiles) == 1):
 		toPDF2(filename,newdir+ffiles[0]+"\\",ii)
 	else:
@@ -61,7 +66,11 @@ def toPDF2(filename, newdir,ii):
 		firstP = True
 		im = None
 		for image in ffiles:
-			if (image.endswith(".jpg") or image.endswith(".JPG") or image.endswith(".jpeg") or image.endswith(".JPEG")):
+			if (image.endswith(".jpg") or image.endswith(".png") or image.endswith(".webp") or image.endswith(".tif.png.jpg") or image.endswith(".png.jpg") or image.endswith(".JPG") or image.endswith(".jpeg") or image.endswith(".JPEG")):
+				image.replace("~", "")
+				if (image.endswith(".webp") or image.endswith(".png")):			
+					os.rename(newdir+image,newdir+image + ".jpg")
+					image = image + ".jpg"
 				im1 = Image.open(newdir+image)
 				try:
 					im1.save(newdir+image,dpi=(96,96))
@@ -75,7 +84,7 @@ def toPDF2(filename, newdir,ii):
 			else: continue
 		#print(exif)
 		im.save(filename, "PDF" ,resolution=100.0, save_all=True, append_images=im_list)
-		cleanDir(newdir)
+	cleanDir(newdir)
 	#print("OK")
 
 def cleanDir(dir):
@@ -96,7 +105,10 @@ def opendir(directory):
 			handlezip(file)
 		elif (file[-4:] == '.cbr' or file[-4:] == '.rar'):
 			# change to rar
-			handlerar2(file)
+			try:
+				handlerar2(file)
+			except:
+				handlerar2(file)
 	if failed:
 		print ("WARNING: some items were skipped")
 
